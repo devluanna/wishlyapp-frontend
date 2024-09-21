@@ -9,6 +9,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class SignupLayoutComponent {
   @Input() title: string = "";
+  @Input() titleSecondary: string = "";
+  @Input() subtitleSecondary: string = "";
+  @Input() footerPage: string = "";
   @Input() primaryBtnText: string = "";
   @Input() secondaryBtnText: string = "";
   @Input() disablePrimaryBtn: boolean = true;

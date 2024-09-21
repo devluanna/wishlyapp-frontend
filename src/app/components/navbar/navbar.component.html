@@ -1,9 +1,6 @@
 <nav class="navbar">
   <div class="div-control-logo">
-    <div class="logo-text">
-      <span>People</span>
-      <span style="font-weight: 600">Hub</span>
-    </div>
+    <img src="/assets/svg/logowhite.png" alt="Logo"/>
   </div>
 
   <div class="div-control-box-infos">
@@ -27,7 +24,7 @@
 
       <img
         style="cursor: pointer"
-        src="/assets/svg/navbar/settings.svg"
+        src="/assets/svg/navbar/setting.svg"
         (click)="toggleSettingsMenu()"
       />
 
@@ -36,9 +33,7 @@
       (mouseleave)="toggleSettingsMenu()"
     ></app-submenu-navbar>
       
-      <div class="user-name">
-        <span>{{ userInitials }}</span>
-      </div>
+
     </div>
 
     <div class="icon-logout">

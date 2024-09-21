@@ -1,42 +1,34 @@
 <main>
-    <section class="background">
-        <div class="backopacity"></div>
-        <img src="/assets/svg/background.png" class="background-image">
-    </section>
-    
+  
     <div class="form-section">
-
-        <div class="form-column-primary">
+      <div class="form-column-primary">
         
-            <img src="/assets/svg/logo.png" alt="Logo"/>
-
-            <h2>{{ title }}</h2>
-            <div class="content-form">
-            <ng-content></ng-content>
-
-            <div class="btn-wrapper">
+        <h2>{{ title }}</h2>
+  
+        <div class="content-form">
+          <ng-content></ng-content>
+  
+          <div class="btn-wrapper">
+            <button class="btn-primary" (click)="submit()" [disabled]="disablePrimaryBtn">
+              {{ primaryBtnText }}
+            </button>
             
-                <button 
-                    class="btn-primary" 
-                    (click)="submit()"
-                    [disabled]="disablePrimaryBtn"
-                >
-                    {{ primaryBtnText }}
-                </button>
-
-                <button class="btn-secondary" (click)="navigate()">{{ secondaryBtnText }}</button>
-                
-            </div>
+          </div>
         </div>
-    </div>
-        
-        <div class="form-column-secondary">
-            <img src="/assets/svg/background-secondary.svg" alt="image"/>
-            <span>Entry to this is restricted to employees and affiliates.</span>
+      </div>
+  s
+      <div class="form-column-secondary">
+        <h2>{{titleSecondary}}</h2>
+        <p>{{subtitleSecondary}}</p>
+  
+        <button class="btn-secondary" (click)="navigate()">{{ secondaryBtnText }}</button>
+  
+        <div class="footer-secondary">
+          <span>{{footerPage}}</span>
+          <img src="/assets/svg/logowhite.png" alt="Logo" class="small-logo" />
         </div>
+      </div>
     </div>
-
-    <div class="footer">
-        <span>Terms of Use | Browser and Display Compatibility Copyright © 2024 </span>
-    </div>
-</main>
+ 
+  </main>
+  

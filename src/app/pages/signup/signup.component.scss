@@ -1,0 +1,18 @@
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+  }
+  
+  .input-row {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .input-row app-input {
+    flex: 1;
+  }
+  
+  app-input {
+    width: 100%;}
+  

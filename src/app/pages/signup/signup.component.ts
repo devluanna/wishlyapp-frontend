@@ -19,7 +19,11 @@ interface SignupForm {
   first_name: FormControl;
   last_name: FormControl;
   email: FormControl;
-  role: FormControl;
+  username: FormControl;
+  dateBirthday: FormControl;
+  gender:FormControl;
+  password: FormControl;
+  confirmPassword:FormControl;
 }
 
 @Component({
@@ -57,10 +61,11 @@ export class SignupComponent {
         Validators.minLength(3),
       ]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      role: new FormControl('', [
-        Validators.required,
-        roleValidator(['ADMIN', 'USER']),
-      ]),
+      username: new FormControl('', [Validators.required, Validators.email]),
+      dateBirthday: new FormControl('', [Validators.required, Validators.email]),
+      gender: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.email]),
+      confirmPassword: new FormControl('', [Validators.required, Validators.email]),
     });
   }
 
@@ -70,7 +75,11 @@ export class SignupComponent {
         this.signupForm.value.first_name,
         this.signupForm.value.last_name,
         this.signupForm.value.email,
-        this.signupForm.value.role
+        this.signupForm.value.username,
+        this.signupForm.value.dateBirthday,
+        this.signupForm.value.gender,
+        this.signupForm.value.password,
+        this.signupForm.value.confirmPassword,
       )
       .subscribe({
         next: () => {
@@ -83,8 +92,7 @@ export class SignupComponent {
             this.errorMessage = 'Email already exists!';
             this.signupForm.controls['email'].setErrors({ emailExists: true });
           } else if (err.status === 500) {
-            this.errorMessage = 'This role does not exist, please try ADMIN or USER!';
-            this.signupForm.controls['role'].setErrors({ invalidRole: true });
+        
           } else {
             this.toastService.error('Unexpected error! Try again later');
           }

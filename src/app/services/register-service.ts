@@ -10,8 +10,8 @@ export class RegisterService {
 
   constructor(private httpClient: HttpClient) { }
 
-  register(first_name: string, last_name: string, email: string, role:string){
-    return this.httpClient.post<any>(`${this.apiUrl}/register`, { first_name, last_name, email, role }).pipe(
+  register(first_name: string, last_name: string, email: string, username:string, gender:string, dateBirthday:string, password: string, confirmPassword:string){
+    return this.httpClient.post<any>(`${this.apiUrl}/register`, { first_name, last_name, email, username, gender, dateBirthday, password, confirmPassword }).pipe(
       tap((response) => {
         console.log("Request made successfully!");
       })

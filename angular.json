@@ -3,7 +3,8 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "project-angular-login": {
+    
+    "wishly-shell": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +21,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/project-angular-login",
+            "outputPath": "dist/wishly-shell",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -72,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "project-angular-login:build:production"
+              "browserTarget": "wishly-shell:build:production"
             },
             "development": {
-              "browserTarget": "project-angular-login:build:development"
+              "browserTarget": "wishly-shell:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "project-angular-login:build"
+            "browserTarget": "wishly-shell:build"
           }
         },
         "test": {
@@ -107,7 +108,7 @@
       }
     }
   },
-  "defaultProject": "project-angular-login",
+  "defaultProject": "wishly-shell",
   "cli": {
     "analytics": "a0209f07-4177-4dda-862f-0a57c6dbacd3"
   }

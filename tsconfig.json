@@ -20,15 +20,7 @@
       "es2018",
       "dom"
     ],
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "src/test.ts",
-    "**/*.spec.ts"
-  ]
   },
-  
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

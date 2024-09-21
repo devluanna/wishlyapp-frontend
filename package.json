@@ -1,5 +1,5 @@
 {
-  "name": "project-angular-login",
+  "name": "wishly-shell",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -21,9 +21,9 @@
     "moment": "^2.30.1",
     "ngx-bootstrap": "^6.2.0",
     "ngx-toastr": "^19.0.0",
-    "project-angular-login": "file:",
     "rxjs": "~7.8.1",
     "tslib": "^2.6.3",
+    "wishly-shell": "file:",
     "zone.js": "~0.14.7"
   },
   "devDependencies": {
@@ -34,11 +34,7 @@
     "@types/moment": "^2.13.0",
     "@types/node": "^20.14.2",
     "jasmine-core": "~5.1.2",
-    "karma": "~6.4.3",
-    "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.1",
-    "karma-jasmine": "~5.1.0",
-    "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.4.5"
   }
 }

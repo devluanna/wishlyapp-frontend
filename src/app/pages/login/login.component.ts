@@ -16,7 +16,7 @@ import { UserService } from 'src/app/services/user-service';
 import { CommonModule } from '@angular/common';
 
 interface LoginForm {
-  identity: FormControl;
+  username: FormControl;
   password: FormControl;
 }
 
@@ -47,7 +47,7 @@ export class LoginComponent {
     private userService: UserService
   ) {
     this.loginForm = new FormGroup({
-      identity: new FormControl('', [Validators.required, identityValidator()]),
+      username: new FormControl('', [Validators.required, identityValidator()]),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(6),
@@ -57,7 +57,7 @@ export class LoginComponent {
 
   submit() {
     this.loginService
-      .login(this.loginForm.value.identity, this.loginForm.value.password)
+      .login(this.loginForm.value.username, this.loginForm.value.password)
       .subscribe({
         next: (loginResponse) => {
           const userId = loginResponse.id_user;

@@ -1,54 +1,109 @@
 <app-signup-layout
-  title="Sign up to our system!"
+  title="Create your account!"
+  titleSecondary="Welcome back!"
+  subtitleSecondary="To keep connected with us please login with your personal info."
+  footerPage="Connect dreams and achievements with the"
   primaryBtnText="Sign up"
   secondaryBtnText="Back and Sign in"
   (submit)="submit()"
   (navigate)="navigate()"
   [disablePrimaryBtn]="!signupForm.valid"
 >
-  <form [formGroup]="signupForm">
+  <form [formGroup]="signupForm" class="signup-form">
+    <!-- First Name and Last Name -->
+    <div class="input-row">
+      <app-input
+        formControlName="first_name"
+        inputName="firstName"
+        type="text"
+        label="First Name"
+        placeholder="First Name"
+      >
+        <img src="/assets/svg/signup-input/username-signup.svg" />
+      </app-input>
+      
+      <app-input
+        formControlName="last_name"
+        inputName="lastName"
+        type="text"
+        label="Last Name"
+        placeholder="Last Name"
+      >
+        <img src="/assets/svg/signup-input/username-signup.svg" />
+      </app-input>
+    </div>
+    
+    <!-- Username and Email -->
+    <div class="input-row">
+      <app-input
+        formControlName="username"
+        inputName="username"
+        type="text"
+        label="Username"
+        placeholder="username"
+        [hasError]="signupForm.controls['username'].hasError('usernameExists')"
+        errorMessage="Username already exists!"
+      >
+        <img src="/assets/svg/signup-input/mail.svg" />
+      </app-input>
+
+      <app-input
+        formControlName="email"
+        inputName="email"
+        type="email"
+        label="Email"
+        placeholder="email@email.com"
+        [hasError]="signupForm.controls['email'].hasError('emailExists')"
+        errorMessage="Email already exists!"
+      >
+        <img src="/assets/svg/signup-input/mail.svg" />
+      </app-input>
+    </div>
+
+    <!-- Gender and Date of Birth -->
+    <div class="input-row">
+      <app-input
+        formControlName="gender"
+        inputName="gender"
+        type="text"
+        label="Gender"
+        placeholder="Gender"
+      >
+        <img src="/assets/svg/signup-input/mail.svg" />
+      </app-input>
+
+      <app-input
+        formControlName="dateBirthday"
+        inputName="dateBirthday"
+        type="text"
+        label="Date of Birth"
+        placeholder="Date of Birth"
+      >
+        <img src="/assets/svg/signup-input/mail.svg" />
+      </app-input>
+    </div>
+
+    <!-- Password and Confirm Password -->
     <app-input
-      formControlName="first_name"
-      inputName="firstNname"
-      type="text"
-      label="First Name"
-      placeholder="Bonequinha"
-    >
-      <img src="/assets/svg/signup-input/username-signup.svg" />
-    </app-input>
-    <app-input
-      formControlName="last_name"
-      inputName="lastName"
-      type="text"
-      label="Last Name"
-      placeholder="Cinza"
-    >
-    <img src="/assets/svg/signup-input/username-signup.svg" />
-    </app-input>
-    <app-input
-      formControlName="email"
-      inputName="email"
-      type="email"
-      label="Email"
-      placeholder="bonequinhacinza@peoplehub.com"
-      [hasError]="signupForm.controls['email'].hasError('emailExists')"
-      errorMessage="Email already exists!"
+      formControlName="password"
+      inputName="password"
+      type="password"
+      label="Password"
+      placeholder="Password"
     >
       <img src="/assets/svg/signup-input/mail.svg" />
     </app-input>
-    <app-input
-    formControlName="role"
-    inputName="role"
-    type="text"
-    label="Role"
-    placeholder="ADMIN or USER"
-    [hasError]="signupForm.controls['role'].hasError('invalidRole')"
-    errorMessage="This role does not exist, please try ADMIN or USER!"
-  >
-    <img src="/assets/svg/signup-input/role.svg" />
-  </app-input>
 
-    <span></span>
+    <app-input
+      formControlName="confirmPassword"
+      inputName="confirmPassword"
+      type="password"
+      label="Confirm Password"
+      placeholder="Confirm Password"
+    >
+      <img src="/assets/svg/signup-input/mail.svg" />
+    </app-input>
   </form>
+
   <app-success-modal [registeredEmail]="registeredEmail" [isOpen]="isModalOpen" (onCloseModal)="closeModal()"></app-success-modal>
 </app-signup-layout>

@@ -10,6 +10,7 @@ import { UserService } from 'src/app/services/user-service';
   styleUrl: './header-profile.component.scss'
 })
 export class HeaderProfileComponent {
+  
   userInitials: string = ''; 
   userFullName: string = '';
   userEmail: string = '';

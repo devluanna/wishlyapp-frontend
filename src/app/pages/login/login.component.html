@@ -1,5 +1,6 @@
 <app-login-layout
-    title="Welcome! Log in to your account."
+    title="or use your email account to login"
+    quotePage="With iWishly, your wishes become perfect gifts!"
     primaryBtnText="Login Now"
     secondaryBtnText="Signup Now"
     (submit)="submit()"
@@ -10,11 +11,11 @@
 <div class="boxAlertClass" [ngClass]="boxAlertClass"><span>{{ messageAlert }}</span></div></div>
     <form [formGroup]="loginForm">
         <app-input
-            formControlName="identity"
-            inputName="identity"
-            type="identity"
+            formControlName="username"
+            inputName="username"
+            type="text"
             label="Username"
-            placeholder="your identity 234566"
+            placeholder="username or email"
         >
             <img src="/assets/svg/username.svg"/>
         </app-input>

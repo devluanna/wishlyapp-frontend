@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class LoginLayoutComponent {
   @Input() title: string = "";
+  @Input() quotePage: string = "";
   @Input() primaryBtnText: string = "";
   @Input() secondaryBtnText: string = "";
   @Input() disablePrimaryBtn: boolean = true;
