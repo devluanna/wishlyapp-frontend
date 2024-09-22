@@ -11,7 +11,7 @@ SCSS
 <br />
 
 Screen Login:<br/>
-![alt text](utils-readme/screen-login.png)d
+![alt text](utils-readme/screen-login.png)
 <br /><br />
 Screen Signup: <br/>
 ![alt text](utils-readme/screen-signup.png)
