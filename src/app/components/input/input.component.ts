@@ -22,6 +22,9 @@ type InputTypes = "text" | "identity" | "password" | "email"
   styleUrls: ['./input.component.scss']
 })
 export class InputComponent implements ControlValueAccessor {
+    text(text: any) {
+        throw new Error('Method not implemented.');
+    }
     @Input() type: InputTypes = "text";
     @Input() placeholder: string = "";
     @Input() label: string = "";
