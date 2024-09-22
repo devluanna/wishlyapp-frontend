@@ -20,4 +20,12 @@ describe('SubmenuNavbarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should toggle the sidebar', () => {
+    expect(component.isSubMenuOpen).toBe(false);
+    component.toggleSettingsMenu();
+    expect(component.isSubMenuOpen).toBe(true);
+    component.toggleSettingsMenu();
+    expect(component.isSubMenuOpen).toBe(false);
+  });
 });

@@ -37,6 +37,31 @@ describe('LoginLayoutComponent', () => {
     expect(component).toBeTruthy(); 
   });
 
+  it('should emit onSubmit event when submit is called', () => {
+    jest.spyOn(component.onSubmit, 'emit'); 
+    component.submit();
+    expect(component.onSubmit.emit).toHaveBeenCalled();
+  });
+  
+  it('should emit onNavigate event when navigate is called', () => {
+    jest.spyOn(component.onNavigate, 'emit'); 
+    component.navigate();
+    expect(component.onNavigate.emit).toHaveBeenCalled();
+  });
+
+  
+  it('should open the recovery password modal', () => {
+    component.openRecoveryPassword();
+    expect(component.isModalOpen).toBe(true);
+  });
+  
+  it('should close the recovery password modal', () => {
+    component.openRecoveryPassword(); 
+    component.closeModal();
+    expect(component.isModalOpen).toBe(false);
+  });
+  
+
 
 });
 

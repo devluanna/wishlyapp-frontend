@@ -20,4 +20,14 @@ describe('ModalDefaultComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
+  it('should emit onSubmit event when submit is called', () => {
+    jest.spyOn(component.onSubmit, 'emit'); 
+    component.submit();
+    expect(component.onSubmit.emit).toHaveBeenCalled();
+  });
+  
+  
+
 });

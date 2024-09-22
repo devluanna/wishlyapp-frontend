@@ -24,7 +24,7 @@ describe('ModalRecoveryPasswordComponent', () => {
         HttpClientTestingModule,
       ],
       providers: [
-        { provide: ToastrService, useClass: ToastrServiceMock } // Mock do ToastrService
+        { provide: ToastrService, useClass: ToastrServiceMock } 
       ],
     }).compileComponents();
 
@@ -45,5 +45,6 @@ describe('ModalRecoveryPasswordComponent', () => {
     expect(component.isModalOpen).toBe(true); 
     expect(emitSpy).toHaveBeenCalled(); 
   });
+  
 
 });
