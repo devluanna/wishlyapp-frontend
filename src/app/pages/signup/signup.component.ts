@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
+  FormBuilder,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
@@ -11,20 +12,8 @@ import { SignupLayoutComponent } from 'src/app/components/signup-layout-componen
 import { RegisterService } from 'src/app/services/register-service';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
-
-import { roleValidator } from 'src/app/validators/validator-role';
 import { SuccessModalComponent } from './success-modal/success-modal.component';
-
-interface SignupForm {
-  first_name: FormControl;
-  last_name: FormControl;
-  email: FormControl;
-  username: FormControl;
-  dateBirthday: FormControl;
-  gender:FormControl;
-  password: FormControl;
-  confirmPassword:FormControl;
-}
+import { RegisterUserModel } from 'src/app/models/register-user.model';
 
 @Component({
   selector: 'app-signup',
@@ -38,71 +27,80 @@ interface SignupForm {
   ],
   providers: [RegisterService],
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.scss',
+  styleUrls: ['./signup.component.scss'],
 })
-export class SignupComponent {
-  signupForm!: FormGroup<SignupForm>;
+export class SignupComponent implements OnInit {
   errorMessage: string = '';
   isModalOpen: boolean = false;
   registeredEmail: string = '';
 
+  public form: FormGroup = new FormGroup({});
+
   constructor(
+    private formBuilder: FormBuilder,
     private router: Router,
     private registerService: RegisterService,
     private toastService: ToastrService
-  ) {
-    this.signupForm = new FormGroup({
-      first_name: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-      ]),
-      last_name: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-      ]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      username: new FormControl('', [Validators.required, Validators.email]),
-      dateBirthday: new FormControl('', [Validators.required, Validators.email]),
-      gender: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.email]),
-      confirmPassword: new FormControl('', [Validators.required, Validators.email]),
-    });
+  ) {}
+
+  ngOnInit(): void {
+    this.registerForm();
+    //this.isModalOpen = true;
+  }
+
+  private registerForm(): void {
+    this.form = this.formBuilder.group(
+      {
+        first_name: new FormControl('', [
+          Validators.required,
+          Validators.minLength(3),
+        ]),
+        last_name: new FormControl('', [
+          Validators.required,
+          Validators.minLength(3),
+        ]),
+        email: new FormControl('', [Validators.required, Validators.email]),
+        username: new FormControl('', [Validators.required]),
+        dateBirthday: new FormControl('', Validators.required),
+        gender: new FormControl('', Validators.required),
+        password: new FormControl('', [
+          Validators.required,
+          Validators.minLength(6),
+        ]),
+        confirm_password: new FormControl('', Validators.required),
+      },
+      { validators: this.passwordMatchValidator }
+    );
+  }
+
+  private passwordMatchValidator(group: FormGroup) {
+    const password = group.get('password')?.value;
+    const confirm_password = group.get('confirm_password')?.value;
+    return password === confirm_password ? null : { passwordsDoNotMatch: true };
   }
 
   submit() {
-    this.registerService
-      .register(
-        this.signupForm.value.first_name,
-        this.signupForm.value.last_name,
-        this.signupForm.value.email,
-        this.signupForm.value.username,
-        this.signupForm.value.dateBirthday,
-        this.signupForm.value.gender,
-        this.signupForm.value.password,
-        this.signupForm.value.confirmPassword,
-      )
-      .subscribe({
-        next: () => {
-          this.isModalOpen = true;
-          this.registeredEmail = this.signupForm.value.email;
-          this.router.navigate(['signup']);
-        },
-        error: (err) => {
-          if (err.status === 500) {
-            this.errorMessage = 'Email already exists!';
-            this.signupForm.controls['email'].setErrors({ emailExists: true });
-          } else if (err.status === 500) {
-        
-          } else {
-            this.toastService.error('Unexpected error! Try again later');
-          }
-        }
-      });
+    if (this.form.invalid) {
+      this.toastService.error("Please fill out all required fields.");
+      return;
+    }
+    const user: RegisterUserModel = this.form.value;
+    this.registerService.register(user).subscribe({
+      next: (response) => {
+        this.isModalOpen = true;
+        this.registeredEmail = response.email;
+        this.toastService.success("Registration successful!");
+      },
+      error: (error) => {
+        this.toastService.error("Registration failed!");
+        console.error(error);
+      }
+    });
   }
 
   closeModal() {
     this.isModalOpen = false;
-    this.signupForm.reset(); 
+    //this.form.reset();
     window.location.reload();
   }
 

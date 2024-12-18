@@ -7,9 +7,9 @@
   secondaryBtnText="Back and Sign in"
   (submit)="submit()"
   (navigate)="navigate()"
-  [disablePrimaryBtn]="!signupForm.valid"
+  [disablePrimaryBtn]="!form.valid"
 >
-  <form [formGroup]="signupForm" class="signup-form">
+  <form [formGroup]="form" class="signup-form">
     <!-- First Name and Last Name -->
     <div class="input-row">
       <app-input
@@ -21,7 +21,7 @@
       >
         <img src="/assets/svg/signup-input/username-signup.svg" />
       </app-input>
-      
+
       <app-input
         formControlName="last_name"
         inputName="lastName"
@@ -32,7 +32,7 @@
         <img src="/assets/svg/signup-input/username-signup.svg" />
       </app-input>
     </div>
-    
+
     <!-- Username and Email -->
     <div class="input-row">
       <app-input
@@ -41,10 +41,10 @@
         type="text"
         label="Username"
         placeholder="username"
-        [hasError]="signupForm.controls['username'].hasError('usernameExists')"
+        [hasError]="form.controls['username'].hasError('usernameExists')"
         errorMessage="Username already exists!"
       >
-        <img src="/assets/svg/signup-input/mail.svg" />
+        <img src="/assets/svg/signup-input/name.svg" />
       </app-input>
 
       <app-input
@@ -53,7 +53,7 @@
         type="email"
         label="Email"
         placeholder="email@email.com"
-        [hasError]="signupForm.controls['email'].hasError('emailExists')"
+        [hasError]="form.controls['email'].hasError('emailExists')"
         errorMessage="Email already exists!"
       >
         <img src="/assets/svg/signup-input/mail.svg" />
@@ -69,7 +69,7 @@
         label="Gender"
         placeholder="Gender"
       >
-        <img src="/assets/svg/signup-input/mail.svg" />
+        <img src="/assets/svg/signup-input/gender.svg" />
       </app-input>
 
       <app-input
@@ -79,7 +79,7 @@
         label="Date of Birth"
         placeholder="Date of Birth"
       >
-        <img src="/assets/svg/signup-input/mail.svg" />
+        <img src="/assets/svg/signup-input/calendar.svg" />
       </app-input>
     </div>
 
@@ -91,19 +91,23 @@
       label="Password"
       placeholder="Password"
     >
-      <img src="/assets/svg/signup-input/mail.svg" />
+      <img src="/assets/svg/signup-input/password.svg" />
     </app-input>
 
     <app-input
-      formControlName="confirmPassword"
-      inputName="confirmPassword"
+      formControlName="confirm_password"
+      inputName="confirm_password"
       type="password"
       label="Confirm Password"
       placeholder="Confirm Password"
     >
-      <img src="/assets/svg/signup-input/mail.svg" />
+      <img src="/assets/svg/signup-input/password.svg" />
     </app-input>
   </form>
 
-  <app-success-modal [registeredEmail]="registeredEmail" [isOpen]="isModalOpen" (onCloseModal)="closeModal()"></app-success-modal>
+  <app-success-modal
+    [registeredEmail]="registeredEmail"
+    [isOpen]="isModalOpen"
+    (onCloseModal)="closeModal()"
+  ></app-success-modal>
 </app-signup-layout>

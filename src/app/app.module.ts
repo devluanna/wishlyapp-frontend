@@ -19,11 +19,14 @@ import { EmailSuccessfullySentModal } from './pages/recovery-password/email-succ
 import { UpdatePasswordComponent } from './pages/update-password/update-password.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LayoutDefaultPagesComponent } from './components/layout-default-pages/layout-default-pages.component';
+import { UploadComponent } from './components/upload-component/upload-component.component';
+
 
 
 @NgModule({
   declarations: [
   AppComponent,
+  UploadComponent,
   SidebarComponent,
   NavbarComponent,
   HeaderProfileComponent,
@@ -37,7 +40,7 @@ import { LayoutDefaultPagesComponent } from './components/layout-default-pages/l
     BrowserModule,
     AppRoutingModule,
     CommonModule,
-    RouterModule
+    RouterModule,
   ],
   providers: [
     provideRouter(routes),

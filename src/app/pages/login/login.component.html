@@ -5,11 +5,11 @@
     secondaryBtnText="Signup Now"
     (submit)="submit()"
     (navigate)="navigate()"
-    [disablePrimaryBtn]="!loginForm.valid"
+    [disablePrimaryBtn]="!form.valid"
 >
 <div class="container-notifications">
 <div class="boxAlertClass" [ngClass]="boxAlertClass"><span>{{ messageAlert }}</span></div></div>
-    <form [formGroup]="loginForm">
+    <form [formGroup]="form">
         <app-input
             formControlName="username"
             inputName="username"

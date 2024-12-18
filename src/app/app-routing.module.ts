@@ -6,12 +6,17 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { UpdatePasswordComponent } from './pages/update-password/update-password.component';
 import { LayoutDefaultPagesComponent } from './components/layout-default-pages/layout-default-pages.component';
 import { AuthGuard } from './services/AuthGuard';
+import { UploadComponent } from './components/upload-component/upload-component.component';
 
 
 export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'upload',
+    component: UploadComponent,
   },
   {
     path: 'signup',

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
+  FormBuilder,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
@@ -14,6 +15,7 @@ import { LoginLayoutComponent } from 'src/app/components/login-layout-component/
 import { ModalRecoveryPasswordComponent } from 'src/app/pages/recovery-password/modal-recovery-password.component';
 import { UserService } from 'src/app/services/user-service';
 import { CommonModule } from '@angular/common';
+import { LoginUser } from 'src/app/models/login-user.mode';
 
 interface LoginForm {
   username: FormControl;
@@ -34,14 +36,16 @@ interface LoginForm {
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm!: FormGroup<LoginForm>;
   userSubStatus: string = '';
   boxAlertClass: string = '';
   messageAlert: string = '';
+  public form: FormGroup = new FormGroup({});
 
   constructor(
     private router: Router,
+    private formBuilder: FormBuilder,
     private loginService: LoginService,
     private toastService: ToastrService,
     private userService: UserService
@@ -54,30 +58,51 @@ export class LoginComponent {
       ]),
     });
   }
+  ngOnInit(): void {
+    this.formLogin();
+  }
+
+  private formLogin(): void {
+    this.form = this.formBuilder.group(
+      {
+        username: new FormControl('', [Validators.required, identityValidator()]),
+        password: new FormControl('', [
+          Validators.required,
+          Validators.minLength(6),
+        ]),
+      },
+    );
+  }
 
   submit() {
-    this.loginService
-      .login(this.loginForm.value.username, this.loginForm.value.password)
-      .subscribe({
-        next: (loginResponse) => {
-          const userId = loginResponse.id_user;
-          console.log('ID TENTANDO LOGIN' + userId);
+    if (this.form.invalid) {
+      this.toastService.error("Please fill out all required fields.");
+      return;
+    }
+    const user: LoginUser = this.form.value;
+    this.loginService.login(user)
+    .subscribe({
+      next: (loginResponse) => {
+        const userId = loginResponse.id_user;
+        console.log('ID TENTANDO LOGIN' + userId);
 
-          if (userId) {
-            this.userService.getUserInfo(userId).subscribe((user) => {
-              this.userSubStatus = user.subStatus;
-              if (this.userSubStatus == 'BLOCKED') {
-                this.setNotificationMessage();
-              } else {
-                this.toastService.success('Login successfully!');
-                this.router.navigate(['home']);
-              }
-            });
-          }
-        },
-        error: () =>
-          this.toastService.error('Unexpected error! Try again later'),
-      });
+        if (userId) {
+          this.userService.getUserInfo(userId).subscribe((user) => {
+            this.userSubStatus = user.subStatus;
+            if (this.userSubStatus == 'ACTIVATED') {
+              this.setNotificationMessage();
+            } else {
+              this.toastService.success('Login successfully!');
+              this.router.navigate(['home']);
+            }
+          });
+        }
+      },
+      error: (error) => {
+        this.toastService.error("Registration failed!");
+        console.error(error);
+      }
+    });
   }
 
   navigate() {
@@ -86,9 +111,9 @@ export class LoginComponent {
 
   private setNotificationMessage(): void {
     switch (this.userSubStatus) {
-      case 'BLOCKED':
+      case 'ACTIVATED':
         this.messageAlert =
-          'Your account is temporarily blocked, please contact support via email: support@peoplehub.com.';
+          'Your account is temporarily INACTIVE, to activate it click on "Activate your account", enter your email and follow the instructions.';
         this.boxAlertClass = 'alert-red';
         break;
       default:

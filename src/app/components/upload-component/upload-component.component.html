@@ -1,0 +1,15 @@
+<div>
+    <h2>Upload de Arquivo para S3</h2>
+  
+    <input type="file" (change)="onFileSelected($event)" />
+    <button (click)="uploadFile()" [disabled]="!selectedFile">Upload</button>
+  
+    <div *ngIf="uploadProgress > 0">
+      Progresso do upload: {{ uploadProgress }}%
+    </div>
+  
+    <div *ngIf="uploadSuccess">
+      <p>Upload concluído com sucesso!</p>
+    </div>
+  </div>
+  
